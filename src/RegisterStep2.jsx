@@ -14,20 +14,35 @@ function RegisterStep2() {
 
   const handleSubmit = async () => {
     const res = await axios.post('http://127.0.0.1:5000/api/register', form, {
-        headers: {
-          'Content-Type': 'application/json'
-        }});
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     localStorage.setItem('providerId', res.data.providerId);
     navigate('/verify-email');
   };
 
   return (
-    <div className="container">
-      <h2>Step 2: Credentials</h2>
-      <input placeholder="Password" type="password" onChange={e => setForm({ ...form, passwordHash: e.target.value })} />
-      <input placeholder="NPI Number" onChange={e => setForm({ ...form, credentials: { ...form.credentials, npi: e.target.value } })} />
-      <input placeholder="DEA Number" onChange={e => setForm({ ...form, credentials: { ...form.credentials, dea: e.target.value } })} />
-      <button onClick={handleSubmit}>Submit & Verify Email</button>
+    <div className="page-center">
+      <div className="register-box">
+        <h2>Step 2: Credentials</h2>
+        <div className="form-row">
+          <input
+            placeholder="Password"
+            type="password"
+            onChange={e => setForm({ ...form, passwordHash: e.target.value })}
+          />
+          <input
+            placeholder="NPI Number"
+            onChange={e => setForm({ ...form, credentials: { ...form.credentials, npi: e.target.value } })}
+          />
+          <input
+            placeholder="DEA Number"
+            onChange={e => setForm({ ...form, credentials: { ...form.credentials, dea: e.target.value } })}
+          />
+          <button onClick={handleSubmit}>Submit & Verify Email</button>
+        </div>
+      </div>
     </div>
   );
 }
